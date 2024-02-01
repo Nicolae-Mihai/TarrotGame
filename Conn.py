@@ -69,6 +69,7 @@ class Conn():
             
             self.dbColl.insert_one(self.insertForm())
     
+    #change the "r" thing in the open file  
     def insertJSON(self,pathFile):
         
         with open(pathFile,"r") as file:
@@ -91,6 +92,7 @@ class Conn():
             "meanings.light":True,
             "meanings.shadow":True
         }
+        
         cards= miau.dbColl.find({}, fieldsToRetrieve)
         cardsArray=[]
         for card in cards:

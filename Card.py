@@ -23,21 +23,32 @@ class Card:
         self.name=name
         self.arcana=arcana
         self.suit=suit
-        self.img=img
+        self.img=pygame.image.load("tarrot cards/images/"+img)
+        self.img=pygame.transform.scale(self.img,(int(75),int(150)))
         self.fortuneTelling=fortuneTelling
         self.keywords=keywords        
         self.lightMeanings:lightMeanings
         self.shadowMeanings:shadowMeanings
         self.faceUp=False
         self.light=random.randint(0,1)
-        cardBack = pygame.image.load('images/BACK.png')
-        self.cardBack=cardBack = pygame.transform.scale(cardBack, (int(350), int(600)))
+        cardBack = pygame.image.load('tarrot cards/images/back.jpeg')
+        self.cardBack=cardBack = pygame.transform.scale(cardBack, (int(75), int(150)))
     
-    def draw(self):
-        # if self.faceUp:
-        #     pygame.image.load("tarrot cards/images/"+self.img+".jpg")
-        # else:
-        #     pygame.image.load("tarrot cards/images/back.jpeg")
+    def draw(self,screen,rectangle):
+        # myimage = pygame.image.load("myimage.bmp")
+        # imagerect = myimage.get_rect()
+
+        # while 1:
+        #     your_code_here
+
+        #     screen.fill(black)
+        #     screen.blit(myimage, imagerect)
+        #     pygame.display.flip()
+        
+        if not self.faceUp:
+            screen.blit(self.img,rectangle)
+        else:
+            screen.blit(self.cardBack,rectangle)
         self.cardBack
     
     def clicked(self):

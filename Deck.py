@@ -14,11 +14,11 @@ class Deck:
             #we get a random number based on the size of the deck so we can pop it out of the deck
             rn=random.randint(0,self.__sizeof__())
             #we give the card variable the value of the item we are about to remove
-            card=self.__getitem__(rn)
+            card=self.deck[rn]
             #we remove the card
-            self.remove(rn)
+            self.deck.remove(self.deck[rn])
             #we append the just removed card at the end of the list
-            self.append(card)
+            self.deck.append(card)
     
     #returns one card without removing it from the deck
     def getOneCard(self):

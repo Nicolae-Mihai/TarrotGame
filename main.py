@@ -1,18 +1,19 @@
 #where the magic happens
 import pygame
-# import Card
-# import Deck
-# import Conn
+
 from Conn import Conn
 from Deck import Deck
 from Card import Card
+
 # pygame setup
 pygame.init()
+
 #this sets up the screen size
 screen = pygame.display.set_mode((1280, 720))
 clock = pygame.time.Clock()
 running = True
 dt = 0
+drawnCards=[]
 #this sets the ball in the center of the screen (initial position)
 player_pos = pygame.Vector2(screen.get_width() / 2, screen.get_height() / 2)
 conn=Conn("mongodb://localhost:27017","Tarrot","Cards")
@@ -20,6 +21,9 @@ cards=conn.cardsList()
 deck=Deck()
 for card in cards:
     deck.addCard(Card(card["_id"],card["name"],card["arcana"],card["suit"],card["img"],card["fortune_telling"],card["keywords"],card.get("meanings",{}).get("light",[]),card.get("meanings",{}).get("shadow",[])))
+
+x=100
+y=100
 
 def drawTable():
     pass
@@ -52,9 +56,17 @@ while running:
         player_pos.x -= 300 * dt
     if keys[pygame.K_d]:
         player_pos.x += 300 * dt
-
-    deck.getOneCard().draw()
+    if keys[pygame.K_b]:
+        deck.shuffle()
+    if keys[pygame.K_f] and len(drawnCards) !=3:
+        x=y=x+100
+        drawnCards.append(deck.removeOneCard())
     # flip() the display to put your work on screen
+    
+    for card in drawnCards:
+        card.draw(screen,pygame.Rect(x,y,75,150))
+        
+    
     pygame.display.flip()
 
     # limits FPS to 60
