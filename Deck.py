@@ -3,9 +3,10 @@ import Card
 import random
 
 class Deck:
+    deck=[]
     #constructor
-    def __init__(self,deck):
-            self.deck=deck
+    def __init__(self):
+        pass
     
     #shuffles the deck, doesn't return anything
     def shuffle(self):
@@ -18,11 +19,15 @@ class Deck:
             self.remove(rn)
             #we append the just removed card at the end of the list
             self.append(card)
-            
-    #returns one card from the deck and removes it
+    
+    #returns one card without removing it from the deck
     def getOneCard(self):
-        return self.pop()
+        return self.deck.__getitem__(0)
+    
+    #returns one card from the deck and removes it
+    def removeOneCard(self):
+        return self.deck.pop()
     
     #adds one card to the deck
     def addCard(self,card):
-        self.append(card)
+        self.deck.append(card)

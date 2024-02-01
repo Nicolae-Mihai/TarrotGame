@@ -2,7 +2,7 @@
 import random
 import pygame
 
-class card:
+class Card:
     id:int
     name:str
     arcana:str
@@ -16,7 +16,8 @@ class card:
     light:bool
     posX:int
     posY:int
-    def __init__(self,id,name,arcana,suit,img,fortuneTelling,keywords,lightMeanings,shadowMeanings) -> None:
+    
+    def __init__(self,id,name,arcana,suit,img,fortuneTelling,keywords,lightMeanings,shadowMeanings):
         
         self.id=id
         self.name=name
@@ -29,12 +30,15 @@ class card:
         self.shadowMeanings:shadowMeanings
         self.faceUp=False
         self.light=random.randint(0,1)
+        cardBack = pygame.image.load('images/BACK.png')
+        self.cardBack=cardBack = pygame.transform.scale(cardBack, (int(350), int(600)))
     
     def draw(self):
-        if self.faceUp:
-            pygame.image.load("/images/"+self.img+".jpg")
-        else:
-            pygame.image.load("/images/back.jpg")
+        # if self.faceUp:
+        #     pygame.image.load("tarrot cards/images/"+self.img+".jpg")
+        # else:
+        #     pygame.image.load("tarrot cards/images/back.jpeg")
+        self.cardBack
     
     def clicked(self):
         self.faceUp=True
@@ -46,6 +50,3 @@ class card:
             print("The card is a shadow one and it meaning"+ self.lightMeanings[random.randint(0,self.lightMeanings.__size__)])
     def getPos(self):
         return [self.posX,self.posY]
-    
-    def draw():
-        pass
