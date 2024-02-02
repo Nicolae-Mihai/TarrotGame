@@ -8,20 +8,12 @@ class Conn():
     def __init__(self,connstring,dbname,collName):
         self.client = pymongo.MongoClient(connstring)
         self.dbname=dbname
-        self.collName=collName
-        self.db=None
-    
-    def conn(self):
-                    
-        print ("Creating Database")
         self.db = self.client[self.dbname]
-        print("Creating Collection")
-    
-        #check if the collection already exists
-        if self.collName not in self.db.list_collection_names():
+        
+        if collName not in self.db.list_collection_names():
             self.dbColl=self.db.create_collection(self.collName)            
-        else: self.dbColl=self.db[self.collName]
-    
+        else: self.dbColl=self.db[collName]
+        
     def delete(self,choice,imgCard):
             match choice:
                 case "database":
@@ -66,14 +58,14 @@ class Conn():
         if self.db is not None:
             print ("it's not null")
             # self.db.create_collection(newColl)
-            
             self.dbColl.insert_one(self.insertForm())
     
-    #change the "r" thing in the open file  
+    #the "r" in open file indicates that the file is only to be read from  
     def insertJSON(self,pathFile):
         
         with open(pathFile,"r") as file:
             data=json.load(file) 
+        
         if isinstance(data,list):
             self.dbColl.insert_many(data)
         else:
@@ -93,31 +85,31 @@ class Conn():
             "meanings.shadow":True
         }
         
-        cards= miau.dbColl.find({}, fieldsToRetrieve)
+        cards= self.dbColl.find({}, fieldsToRetrieve)
         cardsArray=[]
         for card in cards:
-            print("- _id: ",card["_id"])
-            print("- Name:", card["name"])
-            print("- Arcana:", card["arcana"])
-            print("- Suit:", card["suit"])
-            print("- Img:", card["img"])
-            print("- Fortune Telling:", card["fortune_telling"])
-            print("- Keywords:", card["keywords"])
-            print("- Light meanings: ",card.get("meanings", {}).get("light", []))
-            print("- Shadow meanings: ",card.get("meanings", {}).get("shadow", []))
-            print("\n-----\n")
+            # print("- _id: ",card["_id"])
+            # print("- Name:", card["name"])
+            # print("- Arcana:", card["arcana"])
+            # print("- Suit:", card["suit"])
+            # print("- Img:", card["img"])
+            # print("- Fortune Telling:", card["fortune_telling"])
+            # print("- Keywords:", card["keywords"])
+            # print("- Light meanings: ",card.get("meanings", {}).get("light", []))
+            # print("- Shadow meanings: ",card.get("meanings", {}).get("shadow", []))
+            # print("\n-----\n")
             cardsArray.append(card)
         return cardsArray
             
-miau=Conn("mongodb://localhost:27017","Tarrot","Cards")
-miau.conn()
+# miau=Conn("mongodb://localhost:27017","Tarrot","Cards")
+# miau.conn()
 # miau.insert("mewmew")
 # miau.insertJSON("./colores.json")
 # miau.delete("database",1) ~~ works
-for x in miau.cardsList():
-    print("----------------------")
-    print(x["img"])
-    print("----------------------")
+# for x in miau.cardsList():
+#     print("----------------------")
+#     print(x["img"])
+#     print("----------------------")
 
 
     
