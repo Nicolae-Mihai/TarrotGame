@@ -3,15 +3,16 @@ import random
 import pygame
 
 class Card:
-    
+    width=150
+    height=300
     def __init__(self,x,y,id,name,arcana,suit,img,fortuneTelling,keywords,lightMeanings,shadowMeanings):
-        self.rectangle=pygame.Rect(x,y,75,150)
+        self.rectangle=pygame.Rect(x,y,self.width,self.height)
         self.id=id
         self.name=name
         self.arcana=arcana
         self.suit=suit
         self.img=pygame.image.load("tarrot cards/images/"+img)
-        self.img=pygame.transform.scale(self.img,(int(75),int(150)))
+        self.img=pygame.transform.scale(self.img,(self.width,self.height))
         self.fortuneTelling=fortuneTelling
         self.keywords=keywords        
         self.lightMeanings:lightMeanings
@@ -19,7 +20,7 @@ class Card:
         self.faceUp=False
         self.light=random.randint(0,1)
         self.cardBack = pygame.image.load('tarrot cards/images/back.jpeg')
-        self.cardBack= pygame.transform.scale(self.cardBack, (int(75), int(150)))
+        self.cardBack= pygame.transform.scale(self.cardBack, (self.width, self.height))
     
     def draw(self,screen):
         

@@ -3,7 +3,6 @@ import pymongo
 import json
 
 class Conn():
-
     
     def __init__(self,connstring,dbname,collName):
         self.client = pymongo.MongoClient(connstring)
@@ -105,7 +104,7 @@ class Conn():
 # miau.conn()
 # miau.insert("mewmew")
 # miau.insertJSON("./colores.json")
-# miau.delete("database",1) ~~ works
+# miau.delete("database",1) 
 # for x in miau.cardsList():
 #     print("----------------------")
 #     print(x["img"])
