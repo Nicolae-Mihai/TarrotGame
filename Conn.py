@@ -87,16 +87,6 @@ class Conn():
         cards= self.dbColl.find({}, fieldsToRetrieve)
         cardsArray=[]
         for card in cards:
-            # print("- _id: ",card["_id"])
-            # print("- Name:", card["name"])
-            # print("- Arcana:", card["arcana"])
-            # print("- Suit:", card["suit"])
-            # print("- Img:", card["img"])
-            # print("- Fortune Telling:", card["fortune_telling"])
-            # print("- Keywords:", card["keywords"])
-            # print("- Light meanings: ",card.get("meanings", {}).get("light", []))
-            # print("- Shadow meanings: ",card.get("meanings", {}).get("shadow", []))
-            # print("\n-----\n")
             cardsArray.append(card)
         return cardsArray
             

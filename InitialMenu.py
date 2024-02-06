@@ -10,7 +10,7 @@ class InitialMenu():
         
         ymulti=1
         for name in self.buttonsNames:
-            button=Button((screen.get_width()//2)-150,self.y*ymulti+50,94,39,name)
+            button=Button((screen.get_width()//2),self.y*ymulti+50,94,39,name,self.screen)
             buttons.append(button)
             ymulti=ymulti+1
         
@@ -20,4 +20,4 @@ class InitialMenu():
         self.screen.fill(miau)
 
         for button in buttons:
-            button.draw(self.screen)
+            button.draw()

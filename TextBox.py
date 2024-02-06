@@ -18,10 +18,10 @@ class TextBox():
             self.active=False
 
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.k_BACKSPACE:
-                user_text=user_text[:-1]
+            if event.key == pygame.K_BACKSPACE:
+                self.userText=self.userText[:-1]
             else:
-                user_text += event.unicode
+                self.userText += event.unicode
         
         if self.active:
             self.color=self.activeColor

@@ -4,8 +4,8 @@ class Button(pygame.Rect):
     textColor=(114, 4, 85)
     textBackground=(60, 7, 83)
   
-    def __init__(self,x,y,width,height,name):
-        # super((width,height))
+    def __init__(self,x,y,width,height,name,screen):
+        self.screen=screen
         self.x=x
         self.y=y
         self.width=width
@@ -15,18 +15,18 @@ class Button(pygame.Rect):
         self.text=font.render(f"button used for {name}",True,self.textColor,self.textBackground)
         self.textRect=self.text.get_rect()
     
-    def draw(self,screen):
+    def draw(self):
         self.textRect.x = self.x
         self.textRect.y = self.y
-        self.textRect.center=(screen.get_width()//2,self.y)
-        screen.blit(self.text, self.textRect)
+        self.textRect.center=(self.x,self.y)
+        self.screen.blit(self.text, self.textRect)
     
     def isClicked(self,name,point,menu:str)->str:
         
         if self.textRect.collidepoint(point):
             match name:
                 case "reading":
-                    # print(self.name+"button")
+                    print(self.name+"button")
                     menu="table"
                 case "insertCard":
                     # print(self.name+"button")
