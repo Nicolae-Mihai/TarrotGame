@@ -22,9 +22,6 @@ class Card:
         self.faceUp=False
         
         self.light=random.randint(0,1)
-        self.filler=self.font.render("                                                                                                                                                                                                                                                                                                                       ",True,self.textColor,self.textBackground)
-        self.fillerRect=self.filler.get_rect()
-        self.fillerRect.center=(screen.get_width()//2,15)
         if self.light:
             self.meaning="This light card means "+lightMeanings[random.randint(0,len(lightMeanings)-1)]        
         else:
@@ -32,14 +29,12 @@ class Card:
         
         self.cardBack = pygame.image.load('tarrot cards/images/back.jpeg')
         self.cardBack= pygame.transform.scale(self.cardBack, (self.width, self.height))
-    def draw(self):
-        
+    def draw(self,x,y):        
         if self.faceUp:
             self.screen.blit(self.img,self.rectangle)
             self.text=self.font.render(self.meaning,True,self.textColor,self.textBackground)
             self.textRect=self.text.get_rect()
-            self.textRect.center=(self.screen.get_width()//2,14)
-            self.screen.blit(self.filler,self.fillerRect)
+            self.textRect.center=(x,y)
             self.screen.blit(self.text,self.textRect)
 
             
@@ -50,15 +45,6 @@ class Card:
     def clicked(self,point):
         if self.rectangle.collidepoint(point):
             self.faceUp=True
-            
-    
-    # def meaning(self)->str:
-    #     if self.light:
-    #         meaning="This is a light card and its meaning"
-    #         return meaning
-    #     else:
-    #         meaning="The card is a shadow card and it meaning"
-    #         return meaning
     
     def getPos(self):
         return [self.posX,self.posY]

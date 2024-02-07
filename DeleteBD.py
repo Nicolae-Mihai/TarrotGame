@@ -12,7 +12,7 @@ class deleteDB():
         self.textRect.center=(screen.get_width()//2,200,)
         self.yes=Button(screen.get_width()//4,550,94,39,"yes",self.screen)
         self.no=Button(screen.get_width()//4*3,550,94,39,"no",self.screen)
-    
+        self.deleted=False
     def draw(self):
         miau=(3,6,55)
         self.screen.fill(miau)
@@ -25,6 +25,7 @@ class deleteDB():
             if self.yes.textRect.collidepoint(pygame.mouse.get_pos()):
                 self.conn.delete("database",1)
                 menu="initial"
+                self.deleted=True
             elif self.no.textRect.collidepoint(pygame.mouse.get_pos()):
                 menu="initial"
         return menu

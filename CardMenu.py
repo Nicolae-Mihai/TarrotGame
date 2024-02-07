@@ -16,12 +16,18 @@ class CardMenu():
             ymod+=1
     def drawDrawnCards(self):
             self.screen.blit(self.background,(0,0))
+            pygame.draw.line(self.screen,(3,6,55),(0,0),(1300,0),166)
+
             for button in self.buttons:
                 button.draw()
             if self.drawnCards:
                 for card in self.drawnCards:
                     card.setXandY(200*self.drawnCards.index(card)+350,300)
-                    card.draw()
+                    card.draw(self.screen.get_width()//2,self.drawnCards.index(card)*28+13)
+            if self.deck.shuffled:
+                font=pygame.font.Font('tarrot cards/Ldfcomicsans-jj7l.ttf', 32)
+                text=font.render("The deck is shuffled!",True,(0,0,0),(60,60,60))
+                self.screen.blit(text,pygame.Rect(self.screen.get_width()//2-200,650,1,1))
     def eventHandler(self,deck,menu:str) ->str:
         if menu =="table":
             for button in self.buttons:
@@ -30,18 +36,18 @@ class CardMenu():
                         case "shuffle":
                             print(button.name)
                             deck.shuffle()
-                            menu="table"
+                            
                         case "draw":
                             print(button.name)
                             if len(self.drawnCards) <=2:
                                 self.drawnCards.append(self.deck.removeOneCard())
-                                menu="table"
                             else:
-                                menu="table"
-                                print("You can't draw any more cards!")
+                                font=pygame.font.Font('tarrot cards/Ldfcomicsans-jj7l.ttf', 32)
+                                text=font.render("You can't draw any more cards!",True,(3,6,55),(10,10,10))
+                                self.screen.blit(text,pygame.Rect(self.screen.get_width()//2-200,650,1,1))
+                            self.deck.shuffled=False
                         case "back":
                             print(button.name)
                             menu="initial"
-                    return menu
         return menu
 
