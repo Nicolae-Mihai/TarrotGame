@@ -1,14 +1,17 @@
-#the deck of tarrot cards
 import Card
 import random
 
+#this class creates a deck in which cards are added and contains different methods and functions
+
 class Deck:
+
     #constructor
     def __init__(self,x,y):
         self.x=x
         self.y=y
         self.deck=[]
         self.shuffled=False
+        
     #shuffles the deck, doesn't return anything
     def shuffle(self):
         for i in range(0,100):

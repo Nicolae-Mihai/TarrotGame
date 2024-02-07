@@ -1,5 +1,7 @@
 import pygame
 
+# this class creates the text boxes
+
 class TextBox():
 
     def __init__(self,x,y,screen,name) -> None:
@@ -12,17 +14,13 @@ class TextBox():
         self.active=False
         self.screen=screen
         self.name=name
+    
+    # this checks if the checkbox has been clicked and then keeps listening for key events so it can display and load them
     def clicked(self,point,event,name):
         if self.rect.collidepoint(point) and self.name == name:
             self.active=True
         else:
             self.active=False
-
-        # if event.type == pygame.KEYDOWN:
-        #     if event.key == pygame.K_BACKSPACE:
-        #         self.userText=self.userText[:-1]
-        #     else:
-        #         self.userText += event.unicode
         
         if self.active:
             self.color=self.activeColor
@@ -39,6 +37,5 @@ class TextBox():
         
         self.textSurface=self.font.render(self.userText,True,(255,255,255))
         self.rect.w = max(400, self.textSurface.get_width()+10) 
-        # self.rect.center=(self.screen.get_width()//2,450)
         pygame.draw.rect(self.screen,self.color,self.rect)
         self.screen.blit(self.textSurface,(self.rect.x+5,self.rect.y+5))

@@ -1,6 +1,9 @@
 import pygame
 from Button import Button
 from TextBox import TextBox
+
+# this class creates the insert JSON menu 
+
 class InsertJSON():
     
     def __init__(self,screen,conn):
@@ -19,6 +22,7 @@ class InsertJSON():
         self.back=Button(1000,150,94,39,"back",self.screen)
         self.send=Button(self.screen.get_width()//2,500,94,39,"insert",self.screen)
         self.inserted=False
+    
     def drawMenu(self):
         miau=(3, 6, 55)
         self.screen.fill(miau)
@@ -29,8 +33,10 @@ class InsertJSON():
         self.textBox.draw()
         self.back.draw()
         self.send.draw()
-        
+    
+    # this checks if the button used for insertion has been pressed and if the text box has something in it
     def eventHandler(self,menu:str)->str:
+        
         if menu=="insert json":
             if self.send.textRect.collidepoint(pygame.mouse.get_pos()) and self.textBox.userText:
                 self.insert("insert/"+self.textBox.userText+".json")
@@ -38,9 +44,10 @@ class InsertJSON():
                 menu="initial"
                 
             else:
-                print("Please make sure the JSON you are trying to insert is in the insert folder")
                 menu = "insert json"
         return menu
+   
+    # this method does the insertion
     def insert(self,loc):
         try:
             self.conn.insertJSON(loc)

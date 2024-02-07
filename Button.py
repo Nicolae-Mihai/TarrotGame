@@ -20,7 +20,7 @@ class Button(pygame.Rect):
         self.textRect.y = self.y
         self.textRect.center=(self.x,self.y)
         self.screen.blit(self.text, self.textRect)
-    
+    # verifies if any of the buttons are pushed, mainly in the initial screen and when it's a "back button"
     def isClicked(self,name,point,menu:str)->str:
         
         if self.textRect.collidepoint(point):
