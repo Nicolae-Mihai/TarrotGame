@@ -10,15 +10,13 @@ class Conn():
         self.db = self.client[self.dbname]
         
         if collName not in self.db.list_collection_names():
-            self.dbColl=self.db.create_collection(self.collName)            
+            self.dbColl=self.db.create_collection(collName)            
         else: self.dbColl=self.db[collName]
         
     def delete(self,choice,imgCard):
             match choice:
                 case "database":
-                    confirmation=input("Are you sure you want to delete it?\n 1. Yes!\n 2. No!\n  ")
-                    if confirmation=="yes":
-                        self.client.drop_database(self.dbname)
+                    self.client.drop_database(self.dbname)
                 case "card":
                     confirmation=input("Are you sure you want to delete the card? \n 1. Yes!\n 2. No!\n  ")
                     if confirmation=="yes":

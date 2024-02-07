@@ -26,7 +26,7 @@ class Button(pygame.Rect):
         if self.textRect.collidepoint(point):
             match name:
                 case "reading":
-                    print(self.name+"button")
+                    # print(self.name+"button")
                     menu="table"
                 case "insertCard":
                     # print(self.name+"button")
@@ -35,6 +35,8 @@ class Button(pygame.Rect):
                     # print(self.name+"button")
                     menu="insert json"
                 case "deleteDB":
-                    # print(self.name+"button")
+                    print(self.name+"button")
                     menu="delete DB"
+                case "back":
+                    menu="initial"
         return menu

@@ -1,4 +1,5 @@
 import pygame
+from Button import Button
 from TextBox import TextBox
 class InsertJSON():
     
@@ -15,12 +16,30 @@ class InsertJSON():
         self.textRect2.center=(screen.get_width()//2,57)
         self.screen=screen
         self.conn=conn
+        self.back=Button(1000,150,94,39,"back",self.screen)
+        self.send=Button(self.screen.get_width()//2,500,94,39,"insert",self.screen)
+        
     def drawMenu(self):
         miau=(3, 6, 55)
         self.screen.fill(miau)
         self.screen.blit(self.text1,self.textRect1)
         self.screen.blit(self.text2,self.textRect2)
         self.textBox.draw(self.screen)
-                
+        self.back.draw()
+        self.send.draw()
+        
+    def eventHandler(self,menu:str)->str:
+        if menu=="insert json":
+            if self.send.textRect.collidepoint(pygame.mouse.get_pos()) and self.textBox.userText:
+                self.insert("insert/"+self.textBox.userText+".json")
+                menu="initial"
+            else:
+                print("Por favor introduce donde se localiza el fichero")
+                menu = "insert json"
+        return menu
     def insert(self,loc):
-        self.conn.insertJSON(loc)
+        try:
+            self.conn.insertJSON(loc)
+        except(FileNotFoundError):
+            print("the JSON was not found")
+        

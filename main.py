@@ -2,6 +2,7 @@
 import pygame
 import random
 import time
+from DeleteBD import deleteDB
 from InsertCard import InsertCard
 from InsertJson import InsertJSON
 from InitialMenu import InitialMenu
@@ -28,6 +29,7 @@ cardMenu=CardMenu(deck,screen,drawnCards)
 initialMenu=InitialMenu(screen,buttons)
 insertCard=InsertCard(screen)
 insertJson=InsertJSON(screen,conn)
+deleteDb=deleteDB(screen, conn)
 for card in cards:
     deck.addCard(Card(deck.x+random.randint(0,200),deck.y+random.randint(0,200),card["_id"],card["name"],card["arcana"],card["suit"],card["img"],card["fortune_telling"],card["keywords"],card.get("meanings",{}).get("light",[]),card.get("meanings",{}).get("shadow",[])))
 
@@ -51,8 +53,16 @@ while running:
             if menu == "table":
                 menu=cardMenu.eventHandler(deck,menu)
             
+            if menu == "insert json":
+                menu=insertJson.eventHandler(menu)
+                menu=insertJson.back.isClicked(insertJson.back.name,pygame.mouse.get_pos(),menu)
+            
+            if menu == "delete DB":
+                menu=deleteDb.eventHandler(menu)
+            
         if menu == "insert json":
             insertJson.textBox.clicked(pygame.mouse.get_pos(),event)
+
         #key pressing controll
         # merge all events into their spcecific classes
         if event.type == pygame.KEYDOWN:
@@ -74,7 +84,7 @@ while running:
         case "insert json":
             insertJson.drawMenu()
         case "delete DB":
-            conn.delete("database",1)
+            deleteDb.draw()
         
     pygame.display.flip()
     
