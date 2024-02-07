@@ -21,7 +21,7 @@ class CardMenu():
             if self.drawnCards:
                 for card in self.drawnCards:
                     card.setXandY(200*self.drawnCards.index(card)+350,300)
-                    card.draw(self.screen)
+                    card.draw()
     def eventHandler(self,deck,menu:str) ->str:
         if menu =="table":
             for button in self.buttons:

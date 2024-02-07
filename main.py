@@ -31,7 +31,7 @@ insertCard=InsertCard(screen)
 insertJson=InsertJSON(screen,conn)
 deleteDb=deleteDB(screen, conn)
 for card in cards:
-    deck.addCard(Card(deck.x+random.randint(0,200),deck.y+random.randint(0,200),card["_id"],card["name"],card["arcana"],card["suit"],card["img"],card["fortune_telling"],card["keywords"],card.get("meanings",{}).get("light",[]),card.get("meanings",{}).get("shadow",[])))
+    deck.addCard(Card(deck.x+random.randint(0,200),deck.y+random.randint(0,200),card["_id"],card["name"],card["arcana"],card["suit"],card["img"],card["fortune_telling"],card["keywords"],card.get("meanings",{}).get("light",[]),card.get("meanings",{}).get("shadow",[]),screen))
 
 while running:
     
@@ -52,7 +52,7 @@ while running:
             
             if menu == "table":
                 menu=cardMenu.eventHandler(deck,menu)
-            
+                
             if menu == "insert json":
                 menu=insertJson.eventHandler(menu)
                 menu=insertJson.back.isClicked(insertJson.back.name,pygame.mouse.get_pos(),menu)
