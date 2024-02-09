@@ -11,6 +11,7 @@ from Deck import Deck
 from Card import Card
 
 # this is the main class and starts the whole application and checks if some buttons have been pressed
+
 # pygame configuration
 pygame.init()
 screen = pygame.display.set_mode((1280, 720))
